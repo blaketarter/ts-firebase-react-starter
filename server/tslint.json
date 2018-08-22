@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "tslint:recommended"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts",
+      "coverage/**/*"
+    ]
+  },
+  "rules": {
+    "max-classes-per-file": [
+      true,
+      2
+    ],
+    "interface-name": [
+      true,
+      "never-prefix"
+    ]
+  }
+}
