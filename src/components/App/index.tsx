@@ -13,6 +13,8 @@ import { SignUpLoadable } from "../SignUp";
 addGlobalStyles();
 setupDb();
 
+// TODO: Setup global redux and listen to auth state
+
 const renderHome = () => <HomeLoadable />;
 const renderSignIn = () => <SignInLoadable />;
 const renderSignUp = () => <SignUpLoadable />;
