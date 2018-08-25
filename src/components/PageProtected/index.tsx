@@ -1,6 +1,6 @@
 import { Redirect } from "@reach/router";
 import React from "react";
-import { isAuthenticated } from "../../lib/db";
+import { isAuthenticated } from "../../lib/auth";
 import { PageProps } from "../../types/page";
 
 export function PageProtected({ render, ...props }: PageProps) {

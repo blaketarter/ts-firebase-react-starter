@@ -1,5 +1,6 @@
 import React, { ChangeEvent, Component, MouseEvent } from "react";
-import { signIn } from "../../lib/db";
+import { signIn } from "../../lib/auth";
+import { Link } from "../Link";
 
 interface State {
   username: string;
@@ -19,6 +20,7 @@ class SignIn extends Component<{}, State> {
         <input type="text" name="username" value={username} onChange={this.handleUsernameOnChange} />
         <input type="password" name="password" value={password} onChange={this.handlePasswordOnChange} />
         <input type="submit" onClick={this.handleOnSubmit} />
+        <Link to="/sign-up">Don't have an account?</Link>
       </form>
     );
   }

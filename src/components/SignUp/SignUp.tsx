@@ -1,5 +1,6 @@
 import React, { ChangeEvent, Component, MouseEvent } from "react";
-import { signUp } from "../../lib/db";
+import { signUp } from "../../lib/auth";
+import { Link } from "../Link";
 
 interface State {
   confirmPassword: string;
@@ -27,6 +28,7 @@ class SignUp extends Component<{}, State> {
           onChange={this.handleConfirmPasswordOnChange}
         />
         <input type="submit" onClick={this.handleOnSubmit} />
+        <Link to="/sign-in">Already have an account?</Link>
       </form>
     );
   }

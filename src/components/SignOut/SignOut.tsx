@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { signOut } from "../../lib/db";
+import { signOut } from "../../lib/auth";
 
 class SignOut extends Component {
   public componentDidMount() {
