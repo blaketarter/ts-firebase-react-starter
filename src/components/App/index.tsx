@@ -1,4 +1,5 @@
 import { Router } from "@reach/router";
+import "normalize.css";
 import React, { Component, StrictMode } from "react";
 import { setup } from "../../lib/db";
 import { Link } from "../Link";
