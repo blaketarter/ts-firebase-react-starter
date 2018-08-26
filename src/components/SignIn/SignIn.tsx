@@ -1,23 +1,30 @@
+import { navigate } from "@reach/router";
 import React, { ChangeEvent, Component, MouseEvent } from "react";
-import { signIn } from "../../lib/auth";
+import { connect } from "react-redux";
+import { signIn as signInAction } from "../../actions/auth";
+import { Dispatch } from "../../types/action";
 import { Link } from "../Link";
 
+interface Props {
+  signIn: (email: string, password: string) => Promise<void>;
+}
+
 interface State {
-  username: string;
+  email: string;
   password: string;
 }
 
-class SignIn extends Component<{}, State> {
+class SignIn extends Component<Props, State> {
   public state = {
+    email: "",
     password: "",
-    username: "",
   };
 
   public render() {
-    const { username, password } = this.state;
+    const { email, password } = this.state;
     return (
       <form>
-        <input type="text" name="username" value={username} onChange={this.handleUsernameOnChange} />
+        <input type="text" name="email" value={email} onChange={this.handleemailOnChange} />
         <input type="password" name="password" value={password} onChange={this.handlePasswordOnChange} />
         <input type="submit" onClick={this.handleOnSubmit} />
         <Link to="/sign-up">Don't have an account?</Link>
@@ -26,13 +33,14 @@ class SignIn extends Component<{}, State> {
   }
 
   private handleOnSubmit = (e: MouseEvent<HTMLInputElement>) => {
-    const { username, password } = this.state;
+    const { signIn } = this.props;
+    const { email, password } = this.state;
     e.preventDefault();
-    signIn(username, password);
+    signIn(email, password).then(() => navigate("/"));
   }
 
-  private handleUsernameOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ username: e.target.value });
+  private handleemailOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    this.setState({ email: e.target.value });
   }
 
   private handlePasswordOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -40,4 +48,7 @@ class SignIn extends Component<{}, State> {
   }
 }
 
-export default SignIn;
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  ({ signIn: (email: string, password: string) => dispatch(signInAction(email, password)) });
+
+export default connect(null, mapDispatchToProps)(SignIn);

@@ -1,25 +1,32 @@
+import { navigate } from "@reach/router";
 import React, { ChangeEvent, Component, MouseEvent } from "react";
-import { signUp } from "../../lib/auth";
+import { connect } from "react-redux";
+import { signUp as signUpAction } from "../../actions/auth";
+import { Dispatch } from "../../types/action";
 import { Link } from "../Link";
+
+interface Props {
+  signUp: (email: string, password: string) => Promise<void>;
+}
 
 interface State {
   confirmPassword: string;
-  username: string;
+  email: string;
   password: string;
 }
 
-class SignUp extends Component<{}, State> {
+class SignUp extends Component<Props, State> {
   public state = {
     confirmPassword: "",
+    email: "",
     password: "",
-    username: "",
   };
 
   public render() {
-    const { username, password, confirmPassword } = this.state;
+    const { email, password, confirmPassword } = this.state;
     return (
       <form>
-        <input type="text" name="username" value={username} onChange={this.handleUsernameOnChange} />
+        <input type="text" name="email" value={email} onChange={this.handleemailOnChange} />
         <input type="password" name="password" value={password} onChange={this.handlePasswordOnChange} />
         <input
           type="password"
@@ -34,13 +41,16 @@ class SignUp extends Component<{}, State> {
   }
 
   private handleOnSubmit = (e: MouseEvent<HTMLInputElement>) => {
-    const { username, password, confirmPassword } = this.state;
+    const { signUp } = this.props;
+    const { email, password, confirmPassword } = this.state;
     e.preventDefault();
-    signUp(username, password, confirmPassword);
+    if (password === confirmPassword) {
+      signUp(email, password).then(() => navigate("/"));
+    }
   }
 
-  private handleUsernameOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ username: e.target.value });
+  private handleemailOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    this.setState({ email: e.target.value });
   }
 
   private handlePasswordOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,4 +62,7 @@ class SignUp extends Component<{}, State> {
   }
 }
 
-export default SignUp;
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  ({ signUp: (email: string, password: string) => dispatch(signUpAction(email, password)) });
+
+export default connect(null, mapDispatchToProps)(SignUp);

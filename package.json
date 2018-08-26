@@ -10,7 +10,11 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-loadable": "^5.5.0",
-    "react-scripts": "1.1.4",
+    "react-redux": "^5.0.7",
+    "react-redux-firebase": "^2.1.8",
+    "react-scripts-ts": "^2.17.0",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^3.4.5"
   },
   "scripts": {
@@ -25,8 +29,9 @@
     "@types/react": "^16.4.11",
     "@types/react-dom": "^16.0.7",
     "@types/react-loadable": "^5.4.1",
+    "@types/react-redux": "^6.0.6",
     "@types/recompose": "^0.26.4",
-    "react-scripts-ts": "^2.17.0",
+    "@types/redux": "^3.6.0",
     "tslint": "^5.11.0",
     "typescript": "^3.0.1"
   }

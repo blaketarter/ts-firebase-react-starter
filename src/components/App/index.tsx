@@ -1,6 +1,7 @@
 import { Router } from "@reach/router";
 import React, { Component, StrictMode } from "react";
-import { setupDb } from "../../lib/db";
+import { Provider } from "react-redux";
+import { createStore } from "../../lib/store";
 import { addGlobalStyles, theme, ThemeProvider } from "../../lib/theme";
 import { HomeLoadable } from "../Home";
 import { PageNotFound } from "../PageNotFound";
@@ -11,9 +12,8 @@ import { SignOutLoadable } from "../SignOut";
 import { SignUpLoadable } from "../SignUp";
 
 addGlobalStyles();
-setupDb();
 
-// TODO: Setup global redux and listen to auth state
+const store = createStore();
 
 const renderHome = () => <HomeLoadable />;
 const renderSignIn = () => <SignInLoadable />;
@@ -24,15 +24,17 @@ class App extends Component {
   public render() {
     return (
       <StrictMode>
-        <ThemeProvider theme={theme}>
-          <Router>
-            <PageProtected path="/" render={renderHome} />
-            <PageUnprotected path="/sign-in" render={renderSignIn} />
-            <PageUnprotected path="/sign-up" render={renderSignUp} />
-            <PageProtected path="/sign-out" render={renderSignOut} />
-            <PageNotFound default={true} />
-          </Router>
-        </ThemeProvider>
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            <Router>
+              <PageProtected path="/" render={renderHome} />
+              <PageUnprotected path="/sign-in" render={renderSignIn} />
+              <PageUnprotected path="/sign-up" render={renderSignUp} />
+              <PageProtected path="/sign-out" render={renderSignOut} />
+              <PageNotFound default={true} />
+            </Router>
+            </ThemeProvider>
+          </Provider>
       </StrictMode>
     );
   }
