@@ -1,7 +1,7 @@
-import { navigate } from "@reach/router";
 import React, { ChangeEvent, Component, MouseEvent } from "react";
 import { connect } from "react-redux";
 import { signUp as signUpAction } from "../../actions/auth";
+import { navigate } from "../../lib/navigate";
 import { Dispatch } from "../../types/action";
 import { Link } from "../Link";
 

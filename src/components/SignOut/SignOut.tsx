@@ -1,7 +1,7 @@
-import { navigate } from "@reach/router";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signOut as signOutAction } from "../../actions/auth";
+import { navigate } from "../../lib/navigate";
 import { noop } from "../../lib/noop";
 import { Dispatch } from "../../types/action";
 import { signInUrl } from "../../types/route";
