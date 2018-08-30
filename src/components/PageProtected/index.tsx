@@ -1,4 +1,3 @@
-import { Redirect } from "@reach/router";
 import React from "react";
 import { connect } from "react-redux";
 import { isLoaded } from "react-redux-firebase";
@@ -8,6 +7,7 @@ import { PageProps } from "../../types/page";
 import { State } from "../../types/state";
 import { firebaseStateName } from "../../types/store";
 import Loading from "../Loading";
+import { Redirect } from "../Redirect";
 
 interface Props {
   auth?: object;
